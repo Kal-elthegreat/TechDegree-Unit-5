@@ -105,14 +105,14 @@ $('#modal-close-btn').on('click', function(){
 })
 
 // opens window on click
-$('div.card').click(function(e){
+$('#gallery').click(function(e){
     const target = $(e.target)
-    //if(!target.hasClass('gallery')){
+    if(!target.hasClass('gallery')){
     console.log(target.index)
     $('.modal-container').show()
     console.log(responseResults)
    
-  //  }
+    }
 });
 
 
