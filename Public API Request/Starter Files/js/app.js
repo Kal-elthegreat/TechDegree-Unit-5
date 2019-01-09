@@ -108,7 +108,7 @@ $('#modal-close-btn').on('click', function(){
 $('#gallery').click(function(e){
     const target = $(e.target)
     if(!target.hasClass('gallery')){
-    console.log(target.index)
+    console.log(target)
     $('.modal-container').show()
     console.log(responseResults)
    
