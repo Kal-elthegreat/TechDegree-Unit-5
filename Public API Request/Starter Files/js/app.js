@@ -1,9 +1,9 @@
+let responseResults;
 $(document).ready(function(){
   //     GALLERY SECTION
 
     var url = 'https://randomuser.me/api/?nat=us&results=12&exc=gender,login,registered,id'
     $.getJSON(url, function(response){
-        console.log(response.results);
         $.each(response.results, function(index,employee){
             dirHTML = '<div class="card">'
             dirHTML += '<div class="card-img-container">'
@@ -17,8 +17,8 @@ $(document).ready(function(){
             dirHTML += '</div>' //  card
             document.getElementById('gallery').innerHTML += dirHTML;
         }) // end each
+            responseResults = response.results
     }) // getJSON
-
 
 });// end ready
 
@@ -97,7 +97,7 @@ infoContainer.append(phoneNumber);
 // set pop up to hide
 $('.modal-container').hide()     
 
-/***** Modal pop up works but only on img click   ******/
+/*****  ******/
 
 // closes pop-up
 $('#modal-close-btn').on('click', function(){
@@ -105,50 +105,67 @@ $('#modal-close-btn').on('click', function(){
 })
 
 // opens window on click
-$('#gallery').click(function(e){
+$('div.card').click(function(e){
     const target = $(e.target)
-
-    if(!target.hasClass('gallery')){
-        if(target.is('DIV') && target.hasClass('card-info-container')){
-            console.log(target)
-            console.log('card info')
-        } else if(target.is('DIV')&& target.hasClass('card-img-container')){
-            console.log(target)
-            console.log('card img')
-        }
-
-        if (target.is('P')){
-            if(target.hasClass('cap')){
-                const sibling = target.prev();
-                city.textContent = target.text();
-                email.textContent = target.prev().text();
-                name.textContent = sibling.prev().text();
-            } else {
-                email.textContent = target.text();
-                name.textContent = target.prev().text();
-                city.textContent = target.next().text();
-            }
-            console.log('P element')
-        }
-        if(target.is('H3')){
-            const firstSib = target.next();
-            name.textContent = target.text();
-            email.textContent = firstSib.text();
-            city.textContent = firstSib.next().text();
-            console.log('h3 element')
-        }
-        if(target.is('IMG')){
-            const infoContainer = $(e.target.parentNode).next()
-            const infoChildren = infoContainer.children()
-            const cardName = infoChildren.eq(0).text()
-            const cardEmail = infoChildren.eq(1).text()
-            const cardCity = infoChildren.eq(2).text()
-            $('img.modal-img').attr('src', e.target.src);
-            name.textContent = cardName;
-            email.textContent = cardEmail;
-            city.textContent = cardCity;
-        }
-
-         $('.modal-container').show()
-    }
+    //if(!target.hasClass('gallery')){
+    console.log(target.index)
+    $('.modal-container').show()
+    console.log(responseResults)
+   
+  //  }
 });
+
+
+
+
+
+
+
+
+/******** Possible code to use (ignore for now)
+ *  //     if(target.is('DIV') && target.hasClass('card-info-container')){
+    //         console.log(target)
+    //         console.log('card info')
+    //     } else if(target.is('DIV')&& target.hasClass('card-img-container')){
+    //         console.log(target)
+    //         console.log('card img')
+    //     }
+
+    //     if (target.is('P')){
+    //         if(target.hasClass('cap')){
+    //             const sibling = target.prev();
+    //             city.textContent = target.text();
+    //             email.textContent = target.prev().text();
+    //             name.textContent = sibling.prev().text();
+    //         } else {
+    //             email.textContent = target.text();
+    //             name.textContent = target.prev().text();
+    //             city.textContent = target.next().text();
+    //         }
+    //         console.log('P element')
+    //     }
+    //     if(target.is('H3')){
+    //         const firstSib = target.next();
+    //         name.textContent = target.text();
+    //         email.textContent = firstSib.text();
+    //         city.textContent = firstSib.next().text();
+    //         console.log('h3 element')
+    //     }
+    //     if(target.is('IMG')){
+    //         const infoContainer = $(e.target.parentNode).next()
+    //         const infoChildren = infoContainer.children()
+    //         const cardName = infoChildren.eq(0).text()
+    //         const cardEmail = infoChildren.eq(1).text()
+    //         const cardCity = infoChildren.eq(2).text()
+    //         $('img.modal-img').attr('src', e.target.src);
+    //         name.textContent = cardName;
+    //         email.textContent = cardEmail;
+    //         city.textContent = cardCity;
+    //     }
+
+    //      $('.modal-container').show()
+ * 
+ * 
+ * 
+ * 
+ */
