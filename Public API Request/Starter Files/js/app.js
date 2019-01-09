@@ -1,7 +1,7 @@
 $(document).ready(function(){
   //     GALLERY SECTION
 
-    var url = 'https://randomuser.me/api/?nat=us&results=12'
+    var url = 'https://randomuser.me/api/?nat=us&results=12&exc=gender,login,registered,id'
     $.getJSON(url, function(response){
         console.log(response.results);
         $.each(response.results, function(index,employee){
@@ -19,7 +19,10 @@ $(document).ready(function(){
         }) // end each
     }) // getJSON
 
-    ////    MODAL POP-UP ////
+
+});// end ready
+
+  ////    MODAL POP-UP ////
 
 //create container
 const modalContainer = document.createElement('div');
@@ -92,14 +95,60 @@ dob.textContent = 'Birthday:';  // <-- change here
 infoContainer.append(phoneNumber);
 
 // set pop up to hide
-$('.modal-container').hide()
+$('.modal-container').hide()     
 
-function mouseOver (){
-    $('.modal-container').show()
-}
-$('.card').onmouseover = function() {mouseOver()};      /// closes pop-up
-// $('#modal-close-btn').on('click', function(){
-//     $('.modal-container').hide();
-// })
+/***** Modal pop up works but only on img click   ******/
 
-});// end ready
+// closes pop-up
+$('#modal-close-btn').on('click', function(){
+    $('.modal-container').hide();
+})
+
+// opens window on click
+$('#gallery').click(function(e){
+    const target = $(e.target)
+
+    if(!target.hasClass('gallery')){
+        if(target.is('DIV') && target.hasClass('card-info-container')){
+            console.log(target)
+            console.log('card info')
+        } else if(target.is('DIV')&& target.hasClass('card-img-container')){
+            console.log(target)
+            console.log('card img')
+        }
+
+        if (target.is('P')){
+            if(target.hasClass('cap')){
+                const sibling = target.prev();
+                city.textContent = target.text();
+                email.textContent = target.prev().text();
+                name.textContent = sibling.prev().text();
+            } else {
+                email.textContent = target.text();
+                name.textContent = target.prev().text();
+                city.textContent = target.next().text();
+            }
+            console.log('P element')
+        }
+        if(target.is('H3')){
+            const firstSib = target.next();
+            name.textContent = target.text();
+            email.textContent = firstSib.text();
+            city.textContent = firstSib.next().text();
+            console.log('h3 element')
+        }
+        if(target.is('IMG')){
+            const infoContainer = $(e.target.parentNode).next()
+            const infoChildren = infoContainer.children()
+            const cardName = infoChildren.eq(0).text()
+            const cardEmail = infoChildren.eq(1).text()
+            const cardCity = infoChildren.eq(2).text()
+            $('img.modal-img').attr('src', e.target.src);
+            name.textContent = cardName;
+            email.textContent = cardEmail;
+            city.textContent = cardCity;
+        }
+
+         $('.modal-container').show()
+    }
+});
