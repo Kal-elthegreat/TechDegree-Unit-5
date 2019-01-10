@@ -17,7 +17,7 @@ $(document).ready(function(){
             dirHTML += '</div>' //  card
             document.getElementById('gallery').innerHTML += dirHTML;
         }) // end each
-            responseResults = response.results
+            responseResults = response.results // store response data for later use
     }) // getJSON
 
 });// end ready
@@ -105,17 +105,17 @@ $('#modal-close-btn').on('click', function(){
 })
 
 // opens window on click
-$('#gallery').click(function(e){
+$('#gallery').click(function(e){ // was unable to set click event on div.card as planned so this code is the result of improvisation
     const target = $(e.target)
     if(!target.hasClass('gallery')){ // ignore gallery class
         if(target.hasClass('card')){ // check for card class
             select = target.index(); // get index
         }
         if(target.parent().hasClass('card')){ // check if container
-            select = target.parent().index(); // get index of card
+            select = target.parent().index(); // traverse once to get index of card
         }
         if(target.parent().parent().hasClass('card')){ // check if container child 
-            select = target.parent().parent().index(); // get index of card
+            select = target.parent().parent().index(); // traverse twice to get index of card
         }
         
         // use index to fill in card
