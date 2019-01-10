@@ -84,7 +84,7 @@ infoContainer.append(phoneNumber);
 
 // create address
 const address = document.createElement('p');
-address.className = 'modal-text';
+address.className = 'modal-text cap';
 address.textContent = '123 Portland Ave., Portland, OR 97204';  // <-- change here
 infoContainer.append(address);
 
@@ -92,7 +92,7 @@ infoContainer.append(address);
 const dob = document.createElement('p');
 dob.className = 'modal-text';
 dob.textContent = 'Birthday:';  // <-- change here
-infoContainer.append(phoneNumber);
+infoContainer.append(dob);
 
 // set pop up to hide
 $('.modal-container').hide()     
@@ -107,11 +107,25 @@ $('#modal-close-btn').on('click', function(){
 // opens window on click
 $('#gallery').click(function(e){
     const target = $(e.target)
-    if(!target.hasClass('gallery')){
-    console.log(target)
+    if(!target.hasClass('gallery')){ // ignore gallery class
+        if(target.hasClass('card')){ // check for card class
+            select = target.index(); // get index
+        }
+        if(target.parent().hasClass('card')){ // check if container
+            select = target.parent().index(); // get index of card
+        }
+        if(target.parent().parent().hasClass('card')){ // check if container child 
+            select = target.parent().parent().index(); // get index of card
+        }
+        // use index to fill in card
+    $('img.modal-img').attr('src', responseResults[select].picture.large);
+    name.textContent = responseResults[select].name.first + ' ' +responseResults[select].name.last;
+    email.textContent = responseResults[select].email;
+    city.textContent = responseResults[select].location.city;
+    phoneNumber.textContent = responseResults[select].cell;
+    address.textContent = responseResults[select].location.street +', '+ responseResults[select].location.state +' '+ responseResults[select].location.postcode;
+    dob.textContent = 'Birthday:' + responseResults[select].dob.date;
     $('.modal-container').show()
-    console.log(responseResults)
-   
     }
 });
 
