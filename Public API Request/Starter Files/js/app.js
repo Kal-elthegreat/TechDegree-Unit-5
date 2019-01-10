@@ -22,7 +22,7 @@ $(document).ready(function(){
 
 });// end ready
 
-  ////    MODAL POP-UP ////
+  //// CREATE MODAL POP-UP ////
 
 //create container
 const modalContainer = document.createElement('div');
@@ -95,14 +95,9 @@ dob.textContent = 'Birthday:';  // <-- change here
 infoContainer.append(dob);
 
 // set pop up to hide
-$('.modal-container').hide()     
+$('.modal-container').hide()  
 
-/*****  ******/
-
-// closes pop-up
-$('#modal-close-btn').on('click', function(){
-    $('.modal-container').hide();
-})
+/*********** MODAL EVENTS ******/   
 
 // opens window on click
 $('#gallery').click(function(e){ // was unable to set click event on div.card as planned so this code is the result of improvisation
@@ -129,3 +124,8 @@ $('#gallery').click(function(e){ // was unable to set click event on div.card as
     $('.modal-container').show()
     }
 });
+
+// closes pop-up
+$('#modal-close-btn').on('click', function(){
+    $('.modal-container').hide();
+})
