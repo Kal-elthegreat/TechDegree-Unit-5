@@ -117,6 +117,7 @@ $('#gallery').click(function(e){
         if(target.parent().parent().hasClass('card')){ // check if container child 
             select = target.parent().parent().index(); // get index of card
         }
+        
         // use index to fill in card
     $('img.modal-img').attr('src', responseResults[select].picture.large);
     name.textContent = responseResults[select].name.first + ' ' +responseResults[select].name.last;
@@ -124,62 +125,7 @@ $('#gallery').click(function(e){
     city.textContent = responseResults[select].location.city;
     phoneNumber.textContent = responseResults[select].cell;
     address.textContent = responseResults[select].location.street +', '+ responseResults[select].location.state +' '+ responseResults[select].location.postcode;
-    dob.textContent = 'Birthday:' + responseResults[select].dob.date;
+    dob.textContent = 'Birthday: ' + responseResults[select].dob.date.slice(0,10);
     $('.modal-container').show()
     }
 });
-
-
-
-
-
-
-
-
-/******** Possible code to use (ignore for now)
- *  //     if(target.is('DIV') && target.hasClass('card-info-container')){
-    //         console.log(target)
-    //         console.log('card info')
-    //     } else if(target.is('DIV')&& target.hasClass('card-img-container')){
-    //         console.log(target)
-    //         console.log('card img')
-    //     }
-
-    //     if (target.is('P')){
-    //         if(target.hasClass('cap')){
-    //             const sibling = target.prev();
-    //             city.textContent = target.text();
-    //             email.textContent = target.prev().text();
-    //             name.textContent = sibling.prev().text();
-    //         } else {
-    //             email.textContent = target.text();
-    //             name.textContent = target.prev().text();
-    //             city.textContent = target.next().text();
-    //         }
-    //         console.log('P element')
-    //     }
-    //     if(target.is('H3')){
-    //         const firstSib = target.next();
-    //         name.textContent = target.text();
-    //         email.textContent = firstSib.text();
-    //         city.textContent = firstSib.next().text();
-    //         console.log('h3 element')
-    //     }
-    //     if(target.is('IMG')){
-    //         const infoContainer = $(e.target.parentNode).next()
-    //         const infoChildren = infoContainer.children()
-    //         const cardName = infoChildren.eq(0).text()
-    //         const cardEmail = infoChildren.eq(1).text()
-    //         const cardCity = infoChildren.eq(2).text()
-    //         $('img.modal-img').attr('src', e.target.src);
-    //         name.textContent = cardName;
-    //         email.textContent = cardEmail;
-    //         city.textContent = cardCity;
-    //     }
-
-    //      $('.modal-container').show()
- * 
- * 
- * 
- * 
- */
